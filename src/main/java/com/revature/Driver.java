@@ -18,7 +18,7 @@ public class Driver {
         System.out.println("0) Exit\n");
 
         int flag;
-        // it will execute the code once, and then loop if the flag is not
+        // it will execute the code once, and then loop if the flag is not 1.
         do {
             System.out.println("Please enter a menu option.");
             String input = scanner.nextLine();
