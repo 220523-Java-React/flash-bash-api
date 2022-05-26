@@ -15,26 +15,30 @@ public class Driver {
         System.out.println("What would you like to do?");
         System.out.println("1) Create a Flashcard");
         System.out.println("2) View all Flashcards");
-        System.out.println("0) Exit");
+        System.out.println("0) Exit\n");
 
-
-        String input = scanner.nextLine();
-
-        // switch will receive a variable and then
-           switch(input){ // only gets evaluated once
+        int flag;
+        // it will execute the code once, and then loop if the flag is not
+        do {
+            System.out.println("Please enter a menu option.");
+            String input = scanner.nextLine();
+            switch(input) { // only gets evaluated once
                case "1":
                    System.out.println("Create a flashcard");
+                   flag = 1;
                    break;
                case "2":
                    System.out.println("View all flashcards");
+                   flag = 1;
                    break;
                case "0":
                    System.out.println("Exiting the application");
+                   flag = 1;
                    break;
                default:
-                   System.out.println("Please enter a menu option.");
-                   break;
+                   flag = 0;
            }
+        } while (flag != 1);
 
     }
 }
