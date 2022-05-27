@@ -14,33 +14,6 @@ public class Driver {
         // objects are runtime entities that contain states (variables) and behaviors (methods)
         // classes are blueprints for objects
         System.out.println("Welcome to FlashBash!!");
-<<<<<<< HEAD
-
-        // it will execute the code once, and then loop if the flag is not 1.
-        do {
-            System.out.println("Please enter a correct menu option.");
-            System.out.println("1) Create a Flashcard");
-            System.out.println("2) View all Flashcards");
-            System.out.println("0) Exit\n");
-            String input = scanner.nextLine();
-            switch(input) { // only gets evaluated once
-               case "1":
-                   System.out.println("Create a flashcard");
-                   System.exit(0);
-                   break;
-               case "2":
-                   System.out.println("View all flashcards");
-                   System.exit(0);
-                   break;
-               case "0":
-                   System.out.println("Exiting the application");
-                   System.exit(0);
-                   break;
-               default:
-                   break;
-           }
-        } while (true);
-=======
         String input;
 
         ArrayList<Flashcard> flashcardsList = new ArrayList<>();
@@ -76,7 +49,6 @@ public class Driver {
                     break;
             }
         }
->>>>>>> 67abb08857caae3a832b72e74b9effe3c2320542
 
     }
 }
