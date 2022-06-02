@@ -1,5 +1,8 @@
 package com.revature;
 
+import com.revature.model.Flashcard;
+import com.revature.service.FlashcardService;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,13 +13,15 @@ public class Driver {
         // class to receive user input
         // what is this statement???
         Scanner scanner = new Scanner(System.in);
+
+        FlashcardService flashcardService = new FlashcardService();
+
         // object initialization
         // objects are runtime entities that contain states (variables) and behaviors (methods)
         // classes are blueprints for objects
         System.out.println("Welcome to FlashBash!!");
         String input;
 
-        ArrayList<Flashcard> flashcardsList = new ArrayList<>();
 
         while(true){
             System.out.println("\nWhat would you like to do?");
@@ -33,11 +38,11 @@ public class Driver {
                     flashcard.question = scanner.nextLine();
                     System.out.print("Answer: ");
                     flashcard.answer = scanner.nextLine();
-                    flashcardsList.add(flashcard);
+                    flashcardService.createNewFlashcard(flashcard);
                     break;
                 case "2":
-                    for(int i = 0; i < flashcardsList.size(); i++){
-                        System.out.println(flashcardsList.get(i));
+                    for(int i = 0; i < flashcardService.flashcardCount(); i++){
+                        System.out.println(flashcardService.getAllFlashcards().get(i));
                     }
                     break;
                 case "0":
