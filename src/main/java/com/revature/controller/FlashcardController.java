@@ -17,4 +17,12 @@ public class FlashcardController {
         context.result(flashcardService.getAllFlashcardsAsString());
     };
 
+    public Handler setFlashcard = ctx -> {
+        String question = ctx.body().split(";")[0];
+        String answer = ctx.body().split(";")[1];
+        Flashcard f = new Flashcard(question,answer);
+        //System.out.println(f);
+        flashcardService.createNewFlashcard(f);
+    };
+
 }
