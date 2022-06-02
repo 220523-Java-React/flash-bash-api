@@ -1,4 +1,4 @@
-package com.revature;
+package com.revature.model;
 
 // To contain flashcard information for individual flashcard objects
 
@@ -19,10 +19,23 @@ package com.revature;
 //      String answer;
 
 // this type of class is called a Model -> a class design to model/represent data or information
+
+
+// how we call a method -> Flashcard flashcard = new Flashcard();      new Flashcard("q", "a");
 public class Flashcard {
 
-    String question;
-    String answer;
+    public String question;
+    public String answer;
+
+
+    public Flashcard(){
+
+    }
+
+    public Flashcard(String question, String answer) {
+        this.question = question;
+        this.answer = answer;
+    }
 
     @Override
     public String toString() {
