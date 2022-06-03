@@ -12,20 +12,21 @@ public class FlashcardService {
     private List<Flashcard> flashcards = new ArrayList<>();
 
     public FlashcardService(){
-        flashcards.add(new Flashcard(
-                "Question 1",
-                "Answer 1"
-        ));
+        //flashcards.add(new Flashcard(
+        //        "Question 1",
+        //        "Answer 1"
+        //));
 
-        flashcards.add(new Flashcard(
-                "Question 2",
-                "Answer 2"
-        ));
+        //flashcards.add(new Flashcard(
+        //       "Question 2",
+        //        "Answer 2"
+        //));
 
-        flashcards.add(new Flashcard(
-                "Question 3",
-                "Answer 3"
-        ));
+        //flashcards.add(new Flashcard(
+        //       "Question 3",
+        //        "Answer 3"
+        //));
+
     }
 
     public void createNewFlashcard(Flashcard flashcard){
@@ -68,8 +69,8 @@ public class FlashcardService {
 
         for (Flashcard flashcard : flashcards) {
             builder
-                    .append(flashcard.question).append("\n")
-                    .append(flashcard.answer).append("\n\n");
+                    .append(flashcard.question).append("")
+                    .append(flashcard.answer).append("\n");
         }
 
         return builder.toString();
