@@ -24,6 +24,8 @@ package com.revature.model;
 // how we call a method -> Flashcard flashcard = new Flashcard();      new Flashcard("q", "a");
 public class Flashcard {
 
+    // a unique identifier to separate flashcards
+    public int id;
     public String question;
     public String answer;
 
@@ -33,6 +35,12 @@ public class Flashcard {
     }
 
     public Flashcard(String question, String answer) {
+        this.question = question;
+        this.answer = answer;
+    }
+
+    public Flashcard(int id, String question, String answer) {
+        this.id = id;
         this.question = question;
         this.answer = answer;
     }

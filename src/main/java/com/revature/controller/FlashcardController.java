@@ -14,15 +14,23 @@ public class FlashcardController {
 
     public Handler getAllFlashcards = context -> {
         // get our list of flashcards
-        context.result(flashcardService.getAllFlashcardsAsString());
+        List<Flashcard> flashcards = flashcardService.getAllFlashcards();
+        context.json(flashcards);
+    };
+
+    // intended to receive an id in the request
+    public Handler getFlashcardById = context -> {
+        // how do I pass more information when asking for information
+        String param = context.pathParam("id");
+        int id = Integer.parseInt(param);
+
+        // TODO: add a null check on the getFlashcardById
+        context.json(flashcardService.getFlashcardById(id));
     };
 
     public Handler setFlashcard = ctx -> {
-        String question = ctx.body().split(";")[0];
-        String answer = ctx.body().split(";")[1];
-        Flashcard f = new Flashcard(question,answer);
-        //System.out.println(f);
-        flashcardService.createNewFlashcard(f);
+        Flashcard flashcard = ctx.bodyAsClass(Flashcard.class);
+        flashcardService.createNewFlashcard(flashcard);
     };
 
 }

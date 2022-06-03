@@ -12,20 +12,6 @@ public class FlashcardService {
     private List<Flashcard> flashcards = new ArrayList<>();
 
     public FlashcardService(){
-        flashcards.add(new Flashcard(
-                "Question 1",
-                "Answer 1"
-        ));
-
-        flashcards.add(new Flashcard(
-                "Question 2",
-                "Answer 2"
-        ));
-
-        flashcards.add(new Flashcard(
-                "Question 3",
-                "Answer 3"
-        ));
     }
 
     public void createNewFlashcard(Flashcard flashcard){
@@ -34,6 +20,17 @@ public class FlashcardService {
 
     public List<Flashcard> getAllFlashcards(){
         return flashcards;
+    }
+
+    public Flashcard getFlashcardById(int id){
+        // some sort of logic to traverse through the list and find the flashcard with an id that matches
+        for(Flashcard flashcard : flashcards){
+            if(flashcard.id == id){
+                return flashcard;
+            }
+        }
+
+        return null;
     }
 
     // this method will take all of our flashcards and convert the list to a string
