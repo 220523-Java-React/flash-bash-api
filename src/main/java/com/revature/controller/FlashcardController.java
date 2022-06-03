@@ -22,7 +22,7 @@ public class FlashcardController {
         String question = context.body().substring(0,context.body().indexOf("\n"));
         System.out.print(question);
         String answer = context.body().substring(context.body().indexOf("\n"));
-        System.out.print(answer);
+        System.out.println(answer);
 
         Flashcard newFlashcard = new Flashcard(question,answer);
         flashcardService.createNewFlashcard(newFlashcard);

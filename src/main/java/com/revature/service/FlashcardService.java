@@ -70,7 +70,7 @@ public class FlashcardService {
         for (Flashcard flashcard : flashcards) {
             builder
                     .append(flashcard.question).append("")
-                    .append(flashcard.answer).append("\n");
+                    .append(flashcard.answer).append("\n\n");
         }
 
         return builder.toString();
