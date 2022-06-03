@@ -21,6 +21,7 @@ public class Driver {
         // GET
         // POST
         app.get("/flashcards", flashcardController.getAllFlashcards);
+        app.post("/flashcards", flashcardController.createFlashcard);
 
     }
 }
