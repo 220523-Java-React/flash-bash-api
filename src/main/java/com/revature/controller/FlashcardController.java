@@ -17,4 +17,19 @@ public class FlashcardController {
         context.result(flashcardService.getAllFlashcardsAsString());
     };
 
+    public Handler createFlashcard = ctx -> {
+        String body = ctx.body();
+
+        String question = body.split("\n")[0];
+        String answer = body.split("\n")[1];
+
+        Flashcard flashcard = new Flashcard(question, answer);
+
+        flashcardService.createNewFlashcard(flashcard);
+
+        ctx.result(flashcard.toString());
+        ctx.status(201);
+    };
+
 }
+
