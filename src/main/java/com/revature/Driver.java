@@ -23,6 +23,5 @@ public class Driver {
         // the {} are for path variable
         app.get("/flashcards/{id}", flashcardController.getFlashcardById);
         app.post("/flashcards", flashcardController.setFlashcard);
-
     }
 }
