@@ -1,15 +1,14 @@
-package com.revature.service;
+package unit.service;
 
 import com.revature.model.Flashcard;
+import com.revature.service.FlashcardService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class FlashcardServiceTest {
+public class FlashcardServiceUnitTest {
 
     List<Flashcard> mockList = Mockito.mock(List.class);
 
@@ -50,9 +49,6 @@ public class FlashcardServiceTest {
         Mockito.when(mockList.get(0)).thenReturn(flashcard);
         FlashcardService service = new FlashcardService(mockList);
         Flashcard result = service.getFlashcardById(0);
-
-        Assertions.assertEquals(flashcard.id, result.id);
-        Assertions.assertEquals(flashcard.question, result.question);
-        Assertions.assertEquals(flashcard.answer, result.answer);
+        Assertions.assertEquals(flashcard, result);
     }
 }

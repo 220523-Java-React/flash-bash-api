@@ -21,13 +21,17 @@ package com.revature.model;
 // this type of class is called a Model -> a class design to model/represent data or information
 
 
+import java.io.Serializable;
+import java.util.Objects;
+
 // how we call a method -> Flashcard flashcard = new Flashcard();      new Flashcard("q", "a");
-public class Flashcard {
+public class Flashcard implements Serializable {
 
     // a unique identifier to separate flashcards
-    public int id;
-    public String question;
-    public String answer;
+    private int id;
+    private String question;
+    private String answer;
+    private Topic topic;
 
 
     public Flashcard(){
@@ -45,9 +49,58 @@ public class Flashcard {
         this.answer = answer;
     }
 
+    public int getId(){
+        return id;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public String getQuestion(){
+        return question;
+    }
+
+    public void setQuestion(String question){
+        this.question = question;
+    }
+
+    public String getAnswer(){
+        return answer;
+    }
+
+    public void setAnswer(String answer){
+        this.answer = answer;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Flashcard flashcard = (Flashcard) o;
+        return id == flashcard.id && Objects.equals(question, flashcard.question) && Objects.equals(answer, flashcard.answer) && topic == flashcard.topic;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, question, answer, topic);
+    }
+
     @Override
     public String toString() {
-        return "Q: " + question + "\n" +
-                "A: " + answer + "\n";
+        return "Flashcard{" +
+                "id=" + id +
+                ", question='" + question + '\'' +
+                ", answer='" + answer + '\'' +
+                ", topic=" + topic +
+                '}';
     }
 }
