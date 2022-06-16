@@ -17,8 +17,14 @@ public class UserRepository implements DAO<User>{
         // we need a query to insert that record
         //                                                                                1,2,3,4
         String sql = "insert into users(first_name, last_name, username, password) values(?,?,?,?)";
-        Connection connection = ConnectionUtility.getConnection();
-        try {
+
+        /*
+                This is a Try-With-Resources block
+                used when you have resources that have open channels that you need to eventually close
+
+                try with resource WILL automatically close anything that implements the AutoClosable interface
+         */
+        try(Connection connection = ConnectionUtility.getConnection()){
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, user.getFirstName());
             stmt.setString(2, user.getLastName());
@@ -34,13 +40,12 @@ public class UserRepository implements DAO<User>{
     }
 
     @Override
-    public List<User> getAll() {
+    public List<User> getAll(){
         // Empty lists of users, will add any new users from the result set
         List<User> users = new ArrayList<>();
-
-        Connection connection = ConnectionUtility.getConnection();
         String sql = "select * from users";
-        try{
+
+        try(Connection connection = ConnectionUtility.getConnection()){
             PreparedStatement stmt = connection.prepareStatement(sql);
 
             ResultSet results = stmt.executeQuery();

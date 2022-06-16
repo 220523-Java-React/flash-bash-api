@@ -9,6 +9,7 @@ package com.revature.repository;
             Which CRUD operations will apply to every single repository that we create
  */
 
+import java.sql.SQLException;
 import java.util.List;
 
 /*

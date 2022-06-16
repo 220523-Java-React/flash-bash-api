@@ -2,6 +2,8 @@ package com.revature.service;
 
 import com.revature.model.User;
 import com.revature.repository.UserRepository;
+
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserService {
