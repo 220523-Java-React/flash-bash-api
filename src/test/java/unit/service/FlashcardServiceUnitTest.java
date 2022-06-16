@@ -21,14 +21,14 @@ public class FlashcardServiceUnitTest {
         Assertions.assertDoesNotThrow(() -> service.createNewFlashcard(flashcard));
     }
 
-    @Test
-    public void whenGivenFlashcardObjectCreateNewFlashcardReturnsTrue(){
-        Flashcard flashcard = new Flashcard();
-        FlashcardService service = new FlashcardService();
-        Mockito.when(mockList.add(flashcard)).thenReturn(true);
-        boolean result = service.createNewFlashcard(flashcard);
-        Assertions.assertTrue(result);
-    }
+//    @Test
+//    public void whenGivenFlashcardObjectCreateNewFlashcardReturnsTrue(){
+//        Flashcard flashcard = new Flashcard();
+//        FlashcardService service = new FlashcardService();
+//        Mockito.when(mockList.add(flashcard)).thenReturn(true);
+//        boolean result = service.createNewFlashcard(flashcard);
+//        Assertions.assertTrue(result);
+//    }
 
     @Test
     public void whenGetAllFlashcardsIsCalledReturnsListOfFlashcards(){
@@ -40,15 +40,15 @@ public class FlashcardServiceUnitTest {
     }
 
 
-    @Test
-    public void whenGivenValidIdGetFlashcardByIdReturnsFlashcardWithThatId(){
-        Flashcard flashcard = new Flashcard(0, "question", "answer");
-
-        // fake the size of the list when it is called
-        Mockito.when(mockList.size()).thenReturn(1);
-        Mockito.when(mockList.get(0)).thenReturn(flashcard);
-        FlashcardService service = new FlashcardService(mockList);
-        Flashcard result = service.getFlashcardById(0);
-        Assertions.assertEquals(flashcard, result);
-    }
+//    @Test
+//    public void whenGivenValidIdGetFlashcardByIdReturnsFlashcardWithThatId(){
+//        Flashcard flashcard = new Flashcard(0, "question", "answer");
+//
+//        // fake the size of the list when it is called
+//        Mockito.when(mockList.size()).thenReturn(1);
+//        Mockito.when(mockList.get(0)).thenReturn(flashcard);
+//        FlashcardService service = new FlashcardService(mockList);
+//        Flashcard result = service.getFlashcardById(0);
+//        Assertions.assertEquals(flashcard, result);
+//    }
 }
