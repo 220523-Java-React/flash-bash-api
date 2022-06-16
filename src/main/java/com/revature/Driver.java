@@ -1,6 +1,7 @@
 package com.revature;
 
 import com.revature.controller.FlashcardController;
+import com.revature.controller.UserController;
 import com.revature.model.User;
 import io.javalin.Javalin;
 import io.javalin.http.HandlerType;
@@ -40,6 +41,7 @@ public class Driver {
 
 
         FlashcardController flashcardController = new FlashcardController();
+        UserController userController = new UserController();
         Javalin app = Javalin.create().start(8080);
         app.get("/", context -> context.result("Welcome to the FlashBashAPI"));
 
@@ -51,5 +53,8 @@ public class Driver {
         // the {} are for path variable
         app.get("/flashcards/{id}", flashcardController.getFlashcardById);
         app.post("/flashcards", flashcardController.setFlashcard);
+
+        app.get("/users", userController.getAllUsers);
+        app.post("/users", userController.createNewUser);
     }
 }

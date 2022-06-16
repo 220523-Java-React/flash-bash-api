@@ -1,48 +1,34 @@
 package com.revature.service;
 
 import com.revature.model.User;
-
-import java.util.ArrayList;
+import com.revature.repository.UserRepository;
 import java.util.List;
 
 public class UserService {
 
-    List<User> users;
+    UserRepository userRepository;
 
     public UserService(){
-        users = new ArrayList<>();
+        userRepository = new UserRepository();
     }
 
-    public UserService(List<User> users){
-        this.users = users;
+    public UserService(UserRepository userRepository){
+        this.userRepository = userRepository;
     }
 
-    public boolean createUser(User user){
-        return users.add(user);
+    public User createUser(User user){
+        return userRepository.create(user);
     }
 
     public List<User> getAllUsers(){
-        return users;
+        return userRepository.getAll();
     }
 
     public User getUserById(int id){
-        for(int i = 0; i < users.size(); i++){
-            if(users.get(i).getId() == id){
-                return users.get(i);
-            }
-        }
-
-        return null;
+        return userRepository.getById(id);
     }
 
     public boolean deleteUserById(int id){
-        for(int i = 0; i < users.size(); i++){
-            if(users.get(i).getId() == id){
-                users.remove(i);
-                return true;
-            }
-        }
-
-        return false;
+        return userRepository.deleteById(id);
     }
 }
