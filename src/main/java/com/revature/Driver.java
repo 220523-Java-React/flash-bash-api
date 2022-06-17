@@ -17,33 +17,9 @@ import java.util.function.Predicate;
 public class Driver {
 
     public static void main(String[] args){
-        List<String> list = new ArrayList<>();
-        List<Integer> intList = new ArrayList<>();
-
-
-
-
-        int x = 1;
-        Integer wrapInt = x; // autobox -> automatically wrap a primitive in its Class equivalent
-
-        intList.add(x);
-        int y = intList.get(0); // unbox -> automatically unwrap a wrapper class into its primitive
-
-        // Wrapper Class?
-        /*  Serve as wrappers to convert a primitive type into it's Object equivalent
-            byte            Byte
-            short           Short
-            int             Integer
-            long            Long
-            float           Float
-            double          Double
-            char            Character
-            boolean         Boolean
-         */
-
-
         FlashcardController flashcardController = new FlashcardController();
         UserController userController = new UserController();
+
         Javalin app = Javalin.create().start(8080);
         app.get("/", context -> context.result("Welcome to the FlashBashAPI"));
 

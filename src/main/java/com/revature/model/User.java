@@ -10,6 +10,13 @@ import java.util.Objects;
             - provide public methods to interact with them (getters/setters)
 
  */
+
+/*
+        The Builder Design pattern, is a pattern to alleviate need for complex and unnecessary constructors for a model
+        that I want to be able to decide what properties to instantiate upon creation
+
+        Solution -> is to make the setters on the model, return the instance itself so that we can daisy chain setters
+ */
 public class User implements Serializable {
 
     // These are instance variables
@@ -25,59 +32,58 @@ public class User implements Serializable {
 
     }
 
-    public User(String firstName, String lastName, String username, String password){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
-    }
-
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public User setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getFirstName(){
         return firstName;
     }
 
-    public void setFirstName(String firstName){
+    public User setFirstName(String firstName){
         this.firstName = firstName;
+        return this;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public User setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public User setUsername(String username) {
         this.username = username;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     public Role getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public User setRole(Role role) {
         this.role = role;
+        return this;
     }
 
     @Override

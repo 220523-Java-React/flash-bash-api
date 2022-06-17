@@ -3,3 +3,4 @@
 build
 gradle
 gradlew.bat
+src/main/resources/db-config.properties

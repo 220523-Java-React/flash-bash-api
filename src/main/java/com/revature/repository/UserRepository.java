@@ -1,5 +1,6 @@
 package com.revature.repository;
 
+import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.util.ConnectionUtility;
 
@@ -52,14 +53,15 @@ public class UserRepository implements DAO<User>{
 
             while(results.next()){
                 // go through each result, build a User object for that data, add that user object the users list
-                User user = new User();
-                user.setFirstName(results.getString("first_name"));
-                user.setLastName(results.getString("last_name"));
-                user.setUsername(results.getString("username"));
-                user.setPassword(results.getString("password"));
-                user.setId(results.getInt("id"));
+                users.add(new User()
+                        .setLastName(results.getString("last_name"))
+                        .setUsername(results.getString("username"))
+                        .setPassword(results.getString("password"))
+                        .setFirstName(results.getString("first_name"))
+                        .setId(results.getInt("id")));
 
-                users.add(user);
+
+                User user2 = new User().setFirstName("first");
             }
 
 

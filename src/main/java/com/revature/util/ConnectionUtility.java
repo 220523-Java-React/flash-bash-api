@@ -1,8 +1,11 @@
 package com.revature.util;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  *      Problem: We are creating a connection each time -> this is bad
@@ -18,11 +21,8 @@ import java.sql.SQLException;
 public class ConnectionUtility {
 
     private static Connection instance;
+    private static Properties properties;
 
-
-    private final static String url = "jdbc:postgresql://localhost:5432/postgres?currentSchema=flash_bash";
-    private final static String user = "postgres";
-    private final static String password = "1324Pass!";
 
     /**
             JDBC API
@@ -33,12 +33,31 @@ public class ConnectionUtility {
      */
     public static Connection getConnection() throws SQLException{
 
+        if(properties == null){
+            // make sure the properties gets load
+            properties = loadProperties();
+        }
+
         if(instance == null || instance.isClosed()){ // we have not yet created a connection
 
 //            Class.forName("org.postgresql.Driver");
-            instance = DriverManager.getConnection(url, user, password);
+            instance = DriverManager.getConnection(
+                    properties.getProperty("url"),
+                    properties.getProperty("user"),
+                    properties.getProperty("password"));
         }
         return instance;
+    }
+
+    public static Properties loadProperties(){
+        Properties properties = new Properties();
+        try{
+            FileInputStream fileInputStream = new FileInputStream("src/main/resources/db-config.properties");
+            properties.load(fileInputStream);
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+        return properties;
     }
 
     private ConnectionUtility(){

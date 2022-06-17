@@ -49,36 +49,40 @@ public class Flashcard implements Serializable {
         this.answer = answer;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
-    public void setId(int id){
+    public Flashcard setId(int id) {
         this.id = id;
+        return this;
     }
 
-    public String getQuestion(){
+    public String getQuestion() {
         return question;
     }
 
-    public void setQuestion(String question){
+    public Flashcard setQuestion(String question) {
         this.question = question;
+        return this;
     }
 
-    public String getAnswer(){
+    public String getAnswer() {
         return answer;
     }
 
-    public void setAnswer(String answer){
+    public Flashcard setAnswer(String answer) {
         this.answer = answer;
+        return this;
     }
 
     public Topic getTopic() {
         return topic;
     }
 
-    public void setTopic(Topic topic) {
+    public Flashcard setTopic(Topic topic) {
         this.topic = topic;
+        return this;
     }
 
     @Override
