@@ -26,7 +26,7 @@ public class User implements Serializable {
     private String lastName;
     private String username;
     private String password;
-    private Role role = Role.USER;
+    private Role role;
 
     public User(){
 
@@ -110,8 +110,4 @@ public class User implements Serializable {
                 ", role=" + role +
                 '}';
     }
-}
-
-enum Role{
-    USER, ADMIN
 }

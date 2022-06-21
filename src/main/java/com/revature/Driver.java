@@ -2,16 +2,9 @@ package com.revature;
 
 import com.revature.controller.FlashcardController;
 import com.revature.controller.UserController;
-import com.revature.model.User;
-import com.revature.util.ConnectionUtility;
-import io.javalin.Javalin;
-import io.javalin.http.HandlerType;
-import org.eclipse.jetty.http.HttpMethod;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.function.Predicate;
+import com.revature.model.Role;
+import io.javalin.Javalin;
 
 // The purpose of the Driver class is to Drive or Launch
 public class Driver {
@@ -29,10 +22,12 @@ public class Driver {
         // POST
         app.get("/flashcards", flashcardController.getAllFlashcards);
         // the {} are for path variable
+        // /flashcards/1
         app.get("/flashcards/{id}", flashcardController.getFlashcardById);
         app.post("/flashcards", flashcardController.setFlashcard);
 
         app.get("/users", userController.getAllUsers);
+        app.get("/users/{id}", userController.getUserById);
         app.post("/users", userController.createNewUser);
     }
 }
