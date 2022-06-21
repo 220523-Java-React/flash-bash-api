@@ -53,7 +53,12 @@ public class FlashcardController {
         int id = 0;
         try{
             id = Integer.parseInt(param);
-            context.json(flashcardService.getFlashcardById(id));
+            Flashcard flashcard = flashcardService.getFlashcardById(id);
+            if(flashcard != null){
+                context.json(flashcard);
+            } else {
+                context.result("Flashcard not found").status(404);
+            }
         } catch (NumberFormatException e){
             // i would log it
             context.result("Stop giving me words as IDS");
@@ -61,7 +66,6 @@ public class FlashcardController {
         } catch(NullPointerException e){
             System.out.println("Oops");
         }
-        // TODO: add a null check on the getFlashcardById
     };
 
     public Handler setFlashcard = ctx -> {
