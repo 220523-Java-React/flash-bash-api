@@ -36,6 +36,8 @@ public class Driver {
         app.get("/users", userController.getAllUsers);
         app.get("/users/{id}", userController.getUserById);
         app.post("/users", userController.createNewUser);
+        app.put("/users", userController.updateUser);
+        app.delete("/users/{id}", userController.deleteUserById);
 
         app.post("/authenticate", AuthController.authenticate);
         app.post("/register", userController.createNewUser);

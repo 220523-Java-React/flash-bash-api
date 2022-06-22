@@ -3,12 +3,17 @@ package com.revature.repository;
 import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.util.ConnectionUtility;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository implements DAO<User>{
+
+    private static final Logger logger = LoggerFactory.getLogger(UserRepository.class);
+
     @Override
     public User create(User user) {
         // we are receiving a full user object
@@ -37,7 +42,7 @@ public class UserRepository implements DAO<User>{
                 return user.setId(id);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.warn(e.getMessage());
         }
         return null;
     }
@@ -70,7 +75,7 @@ public class UserRepository implements DAO<User>{
 
 
         }catch(SQLException e){
-            e.printStackTrace();
+            logger.warn(e.getMessage());
         }
 
         return users;
@@ -96,7 +101,7 @@ public class UserRepository implements DAO<User>{
                         .setRole(Role.values()[rs.getInt("role_id")]);
             }
         } catch(SQLException e){
-            e.printStackTrace();
+            logger.warn(e.getMessage());
         }
         return null;
     }
@@ -119,18 +124,52 @@ public class UserRepository implements DAO<User>{
                         .setRole(Role.values()[rs.getInt("role_id")]);
             }
         } catch(SQLException e){
-            e.printStackTrace();
+            logger.warn(e.getMessage());
         }
         return null;
     }
 
     @Override
     public User update(User user) {
+        String sql = "update users set first_name = ?, last_name = ?, username = ?, password = ?, role_id = ? where id = ?";
+
+        try(Connection connection = ConnectionUtility.getConnection()){
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, user.getFirstName());
+            stmt.setString(2, user.getLastName());
+            stmt.setString(3, user.getUsername());
+            stmt.setString(4, user.getPassword());
+            stmt.setInt(5, user.getRole().ordinal());
+
+            stmt.setInt(6, user.getId());
+
+            int success = stmt.executeUpdate();
+
+            // if we successfully update the user, return the new database record for it
+            if(success != 0){
+                return getById(user.getId());
+            }
+        } catch(SQLException e){
+            logger.warn(e.getMessage());
+        }
+
         return null;
     }
 
     @Override
     public boolean deleteById(int id) {
+        String sql = "delete from users where id = ?";
+
+        try(Connection connection = ConnectionUtility.getConnection()){
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+
+            int success = stmt.executeUpdate();
+            // returns true if success is not 0 and thus the operation was a success
+            return success != 0;
+        }catch(SQLException e){
+            logger.warn(e.getMessage());
+        }
         return false;
     }
 }

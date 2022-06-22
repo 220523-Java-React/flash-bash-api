@@ -59,4 +59,30 @@ public class UserController {
             context.result("User not created").status(400);
         }
     };
+
+    public Handler updateUser = context -> {
+        User user = context.bodyAsClass(User.class);
+        user = userService.updateUser(user);
+
+        if(user != null){
+            context.status(200).json(user);
+        } else{
+            context.status(400).result("Could not update the user");
+        }
+    };
+
+    public Handler deleteUserById = context ->{
+        String param = context.pathParam("id");
+
+        try{
+            int id = Integer.parseInt(param);
+            if(userService.deleteUserById(id)){
+                context.status(204);
+            } else{
+                context.status(400).result("Could not delete the user with id: " + id);
+            }
+        } catch(NumberFormatException e){
+            context.status(400).result("Please enter a valid id");
+        }
+    };
 }
