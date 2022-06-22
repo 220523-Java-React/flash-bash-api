@@ -1,6 +1,7 @@
 package com.revature.controller;
 
 import com.revature.model.User;
+import com.revature.service.AuthService;
 import com.revature.service.UserService;
 import io.javalin.http.Handler;
 
@@ -58,5 +59,11 @@ public class UserController {
             // some issue with the request
             context.result("User not created").status(400);
         }
+    };
+
+    public Handler login = context -> {
+        User user = context.bodyAsClass(User.class);
+
+        context.result("Bearer " + AuthService.generateToken(user));
     };
 }
