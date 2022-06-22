@@ -1,5 +1,6 @@
 package com.revature;
 
+import com.revature.controller.AuthController;
 import com.revature.controller.FlashcardController;
 import com.revature.controller.UserController;
 
@@ -29,5 +30,12 @@ public class Driver {
         app.get("/users", userController.getAllUsers);
         app.get("/users/{id}", userController.getUserById);
         app.post("/users", userController.createNewUser);
+
+        app.post("/authenticate", AuthController.authenticate);
+        app.post("/register", userController.createNewUser);
+
+        app.before("/users*", AuthController.withAuth);
+        app.before("/users*", AuthController.test);
+        app.before("/flashcards*", AuthController.withAuth);
     }
 }
