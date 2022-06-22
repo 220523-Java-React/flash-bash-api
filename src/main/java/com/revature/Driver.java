@@ -6,11 +6,17 @@ import com.revature.controller.UserController;
 
 import com.revature.model.Role;
 import io.javalin.Javalin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 // The purpose of the Driver class is to Drive or Launch
 public class Driver {
 
+    static Logger logger = LoggerFactory.getLogger(Driver.class);
+
     public static void main(String[] args){
+        logger.error("This is an error");
+
         FlashcardController flashcardController = new FlashcardController();
         UserController userController = new UserController();
 

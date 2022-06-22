@@ -6,11 +6,15 @@ import com.revature.model.Topic;
 import com.revature.service.FlashcardService;
 import io.javalin.http.Handler;
 import org.eclipse.jetty.http.HttpStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
 
 public class FlashcardController {
+
+    private static final Logger logger = LoggerFactory.getLogger(FlashcardController.class);
 
     FlashcardService flashcardService = new FlashcardService();
 
@@ -64,7 +68,7 @@ public class FlashcardController {
             context.result("Stop giving me words as IDS");
             context.status(HttpStatus.BAD_REQUEST_400);
         } catch(NullPointerException e){
-            System.out.println("Oops");
+            logger.warn(e.getMessage());
         }
     };
 

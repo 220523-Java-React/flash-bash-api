@@ -13,11 +13,13 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation group: 'io.javalin', name: 'javalin', version: '4.6.0'
-    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.8.0-beta4'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.2.2'
     testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '4.6.1'
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.3.3'
     implementation group: 'com.auth0', name: 'java-jwt', version: '3.19.2'
+
+    implementation group: 'org.slf4j', name: 'slf4j-log4j12', version:'1.7.36'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.36'
 }
 
 test {
