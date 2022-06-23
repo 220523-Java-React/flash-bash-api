@@ -43,7 +43,6 @@ public class Driver {
         app.post("/register", userController.createNewUser);
 
         app.before("/users*", AuthController.withAuth);
-        app.before("/users*", AuthController.test);
         app.before("/flashcards*", AuthController.withAuth);
     }
 }
