@@ -15,7 +15,6 @@ public class Driver {
     static Logger logger = LoggerFactory.getLogger(Driver.class);
 
     public static void main(String[] args){
-        logger.error("This is an error");
 
         FlashcardController flashcardController = new FlashcardController();
         UserController userController = new UserController();

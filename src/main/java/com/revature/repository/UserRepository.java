@@ -68,12 +68,7 @@ public class UserRepository implements DAO<User>{
                         .setId(results.getInt("id"))
                         .setRole(Role.values()[results.getInt("role_id")])
                 );
-
-
-                User user2 = new User().setFirstName("first");
             }
-
-
         }catch(SQLException e){
             logger.warn(e.getMessage());
         }
@@ -104,6 +99,35 @@ public class UserRepository implements DAO<User>{
             logger.warn(e.getMessage());
         }
         return null;
+    }
+
+    public List<User> getAllByRole(Role role){
+        // Empty lists of users, will add any new users from the result set
+        List<User> users = new ArrayList<>();
+        String sql = "select * from users where role_id = ? order by id";
+
+        try(Connection connection = ConnectionUtility.getConnection()){
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, role.ordinal());
+
+            ResultSet results = stmt.executeQuery();
+
+            while(results.next()){
+                // go through each result, build a User object for that data, add that user object the users list
+                users.add(new User()
+                        .setLastName(results.getString("last_name"))
+                        .setUsername(results.getString("username"))
+                        .setPassword(results.getString("password"))
+                        .setFirstName(results.getString("first_name"))
+                        .setId(results.getInt("id"))
+                        .setRole(Role.values()[results.getInt("role_id")])
+                );
+            }
+        }catch(SQLException e){
+            logger.warn(e.getMessage());
+        }
+
+        return users;
     }
 
     public User getByUsername(String username){

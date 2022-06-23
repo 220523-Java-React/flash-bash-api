@@ -4,5 +4,5 @@ package com.revature.model;
 
 // USER -> 0, ADMIN -> 1
 public enum Role{
-    USER, ADMIN
+    USER, ADMIN, TEACHER
 }

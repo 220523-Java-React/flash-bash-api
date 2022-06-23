@@ -1,9 +1,11 @@
 package com.revature.controller;
 
+import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.service.UserService;
 import io.javalin.http.Handler;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -20,7 +22,23 @@ public class UserController {
     }
 
     public Handler getAllUsers = context -> {
-        context.json(userService.getAllUsers());
+        // lets check if there is a role parameter
+        String roleParam = context.queryParam("role");
+        String usernameParam = context.queryParam("username");
+
+        if(roleParam == null && usernameParam == null){ // if role is null, get all users
+            context.json(userService.getAllUsers());
+        } else if(usernameParam != null){
+            context.json(userService.getUserByUsername(usernameParam));
+        }else{ // if role is not null, get all users by role
+            try{
+                // check if its a valid role
+                Role role = Role.valueOf(roleParam.toUpperCase());
+                context.json(userService.getAllUsersByRole(role));
+            } catch(IllegalArgumentException e) {
+                context.status(400).result("Please enter a valid role: " + Arrays.toString(Role.values()));
+            }
+        }
     };
 
     public Handler getUserById = context -> {

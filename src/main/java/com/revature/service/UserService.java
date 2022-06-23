@@ -1,9 +1,9 @@
 package com.revature.service;
 
+import com.revature.model.Role;
 import com.revature.model.User;
 import com.revature.repository.UserRepository;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class UserService {
@@ -24,6 +24,14 @@ public class UserService {
 
     public List<User> getAllUsers(){
         return userRepository.getAll();
+    }
+
+    public List<User> getAllUsersByRole(Role role){
+        return userRepository.getAllByRole(role);
+    }
+
+    public User getUserByUsername(String username){
+        return userRepository.getByUsername(username);
     }
 
     public User getUserById(int id){
