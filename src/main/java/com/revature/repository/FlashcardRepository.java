@@ -1,8 +1,17 @@
 package com.revature.repository;
 
 import com.revature.model.Flashcard;
+import com.revature.model.Role;
 import com.revature.model.Topic;
+import com.revature.model.User;
+import com.revature.util.ConnectionUtility;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,53 +20,53 @@ import java.util.List;
  */
 public class FlashcardRepository implements DAO<Flashcard> {
 
-    private List<Flashcard> flashcards;
-
-    public FlashcardRepository(){
-        flashcards = new ArrayList<>();
-    }
-
-    public FlashcardRepository(List<Flashcard> flashcards){
-        this.flashcards = flashcards;
-    }
+    private static final Logger logger = LoggerFactory.getLogger(FlashcardRepository.class);
 
     @Override
     public Flashcard create(Flashcard flashcard) {
-        if(flashcards.add(flashcard)){
-            return flashcard;
-        } else{
-            return null;
-        }
+        return null;
     }
 
     @Override
     public List<Flashcard> getAll() {
+        List<Flashcard> flashcards = new ArrayList<>();
+
+        String sql = "select f.id as flashcard_id, question, answer, topic, \n" +
+                "u.id as user_id, first_name, last_name, username, password, role_id from flashcards f \n" +
+                "join users u on f.user_id = u.id";
+
+        try(Connection connection = ConnectionUtility.getConnection()){
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                Flashcard flashcard = new Flashcard()
+                        .setId(rs.getInt("flashcard_id"))
+                        .setQuestion(rs.getString("question"))
+                        .setAnswer(rs.getString("answer"))
+                        .setTopic(Topic.valueOf(rs.getString("topic")))
+                        .setCreator(new User()
+                                .setId(rs.getInt("user_id"))
+                                .setFirstName(rs.getString("first_name"))
+                                .setLastName(rs.getString("last_name"))
+                                .setUsername(rs.getString("username"))
+                                .setRole(Role.values()[rs.getInt("role_id")])
+                        );
+
+                flashcards.add(flashcard);
+            }
+
+
+        } catch(SQLException e){
+            logger.warn(e.getMessage());
+        }
         return flashcards;
     }
 
     @Override
     public Flashcard getById(int id) {
-        for (int i = 0; i < flashcards.size(); i++) {
-            if (flashcards.get(i).getId() == id) {
-                return flashcards.get(i);
-            }
-        }
         return null;
     }
 
-    public List<Flashcard> getAllByTopic(Topic topic){
-        List<Flashcard> filteredFlashcards = new ArrayList<>();
-
-        for(Flashcard flashcard: flashcards){
-            if(flashcard.getTopic().equals(topic)){
-                filteredFlashcards.add(flashcard);
-            }
-        }
-
-        return filteredFlashcards;
-    }
-
-    //TODO: implement these eventually
     @Override
     public Flashcard update(Flashcard flashcard) {
         return null;

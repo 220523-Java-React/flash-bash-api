@@ -32,6 +32,7 @@ public class Flashcard implements Serializable {
     private String question;
     private String answer;
     private Topic topic;
+    private User creator;
 
 
     public Flashcard(){
@@ -82,6 +83,15 @@ public class Flashcard implements Serializable {
 
     public Flashcard setTopic(Topic topic) {
         this.topic = topic;
+        return this;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public Flashcard setCreator(User creator) {
+        this.creator = creator;
         return this;
     }
 

@@ -40,9 +40,9 @@ public class FlashcardService {
         return flashcardRepository.getAll();
     }
 
-    public List<Flashcard> getAllFlashcardsByTopic(Topic topic){
-        return flashcardRepository.getAllByTopic(topic);
-    }
+//    public List<Flashcard> getAllFlashcardsByTopic(Topic topic){
+//        return flashcardRepository.getAllByTopic(topic);
+//    }
 
     public Flashcard getFlashcardById(int id) {
         return flashcardRepository.getById(id);

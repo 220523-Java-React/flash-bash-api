@@ -31,20 +31,20 @@ public class FlashcardController {
             flashcards = flashcardService.getAllFlashcards();
         }
         // if topic is not null, get all flashcards by topic
-        else {
-            try{
-                Topic topic = Topic.valueOf(topicParam.toUpperCase(Locale.ROOT));
-                flashcards = flashcardService.getAllFlashcardsByTopic(topic);
-            }catch(IllegalArgumentException e){
-
-                String failureMessage = "{\"success\":false, \"message\":\"" +
-                        "Please only use the following topic values: " + Arrays.toString(Topic.values())
-                        + "\"}";
-
-                context.status(400).json(failureMessage);
-                return;
-            }
-        }
+//        else {
+//            try{
+//                Topic topic = Topic.valueOf(topicParam.toUpperCase(Locale.ROOT));
+//                flashcards = flashcardService.getAllFlashcardsByTopic(topic);
+//            }catch(IllegalArgumentException e){
+//
+//                String failureMessage = "{\"success\":false, \"message\":\"" +
+//                        "Please only use the following topic values: " + Arrays.toString(Topic.values())
+//                        + "\"}";
+//
+//                context.status(400).json(failureMessage);
+//                return;
+//            }
+//        }
         context.json(flashcards);
     };
 
